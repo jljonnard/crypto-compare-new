@@ -1,0 +1,9 @@
+{
+  "short_name": "Crypto Compare",
+  "name": "Projet vitrine de Jean-Luc Jonnard",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
