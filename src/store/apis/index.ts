@@ -4,7 +4,7 @@ export const getAllCoinsList = () => coingeckoAPI.get("/coins/list");
 export const getTrendingList = () => coingeckoAPI.get("/search/trending");
 export const getMarketCap = () => coingeckoAPI.get("/global");
 
-export const getCoinData = (coin) =>
+export const getCoinData = (coin: string) =>
     coingeckoAPI.get("/coins/" + coin, {
         params: {
             localization: true,
@@ -16,7 +16,11 @@ export const getCoinData = (coin) =>
         },
     });
 
-export const getCoinChart = ({coin, days}) =>
+interface GetCoinChartParams {
+    coin: string;
+    days: number;
+}
+export const getCoinChart = ({ coin, days }: GetCoinChartParams) =>
     coingeckoAPI.get("/coins/" + coin + "/market_chart", {
         params: {
             vs_currency: "eur",

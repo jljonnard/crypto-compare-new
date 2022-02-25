@@ -1,40 +1,17 @@
-export const getSixDigitsOnly = (inputNumber) => {
+export const getSixDigitsOnly = (inputNumber: number) => {
     /* Les nombres décimaux n'étant gérés que sur 32 bits, 
     on est obligé d'utiliser 2 tableaux comme ceci afin de limiter 
     les imprécisions et de générer des décimales dans tous les sens */
-    
+
     let dividers = [
-        1000000,
-        100000,
-        10000,
-        1000,
-        100,
-        10,
-        1,
-        0.1,
-        0.01,
-        0.001,
-        0.0001,
-        0.00001,
-        0.000001,
+        1000000, 100000, 10000, 1000, 100, 10, 1, 0.1, 0.01, 0.001, 0.0001,
+        0.00001, 0.000001,
     ];
     let multiplicators = [
-        0.000001,
-        0.00001,
-        0.0001,
-        0.0001,
-        0.001,
-        0.01,
-        0.1,
-        1,
-        10,
-        100,
-        1000,
-        10000,
-        100000,
-        1000000,
+        0.000001, 0.00001, 0.0001, 0.0001, 0.001, 0.01, 0.1, 1, 10, 100, 1000,
+        10000, 100000, 1000000,
     ];
-    let tabNumber = [];
+    let tabNumber: number[][] = [];
 
     dividers.forEach((divider, id) => {
         tabNumber.push([Math.trunc(inputNumber / divider), id]);
@@ -49,7 +26,9 @@ export const getSixDigitsOnly = (inputNumber) => {
     });
 
     return (
-        Math.round(outputNumber * multiplicators[newTabNumber[newTabNumber.length - 1][1]]) /
-        multiplicators[newTabNumber[newTabNumber.length - 1][1]]
+        Math.round(
+            outputNumber *
+                multiplicators[newTabNumber[newTabNumber.length - 1][1]]
+        ) / multiplicators[newTabNumber[newTabNumber.length - 1][1]]
     );
 };

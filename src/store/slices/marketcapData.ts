@@ -1,16 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { MarketcapDataResponse } from "../../models/MarketCapDataResponse";
 
 type MarketcapDataState = {
     coins: string[];
     percentages: number[];
-};
-
-type MarketcapDataResponse = {
-    data: {
-        data: {
-            market_cap_percentage: number;
-        };
-    };
 };
 
 const INITIAL_STATE_MARKETCAPDATA: MarketcapDataState = {

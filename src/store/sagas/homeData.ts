@@ -4,10 +4,13 @@ import * as api from "../apis";
 import * as marketCapData from "../slices/marketcapData";
 import * as trendingList from "../slices/trendingList";
 import * as allCoinsList from "../slices/allCoinsList";
+import { AllCoinsListResponse } from "../../models/AllCoinsListResponse";
+import { MarketcapDataResponse } from "../../models/MarketCapDataResponse";
+import { TrendingListResponse } from "../../models/TrendingList";
 
 function* getAllCoinsList() {
     try {
-        const response = yield call(api.getAllCoinsList);
+        const response: AllCoinsListResponse = yield call(api.getAllCoinsList);
         yield put(allCoinsList.set(response));
     } catch (error) {
         yield console.log(error);
@@ -20,7 +23,7 @@ function* watchAllCoinsList() {
 
 function* getMarketCapData() {
     try {
-        const response = yield call(api.getMarketCap);
+        const response: MarketcapDataResponse = yield call(api.getMarketCap);
         yield put(marketCapData.set(response));
     } catch (error) {
         yield console.log(error);
@@ -33,7 +36,9 @@ function* watchMarketCapData() {
 
 function* getTrendingList() {
     try {
-        const response = yield call(api.getTrendingList);
+        const response: { data: TrendingListResponse } = yield call(
+            api.getTrendingList
+        );
         yield put(trendingList.set(response));
     } catch (error) {
         yield console.log(error);

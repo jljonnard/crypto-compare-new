@@ -1,3 +1,3 @@
 export type CoinChartResponse = {
-    prices : [[number, number]]
+    prices: number[][];
 };
