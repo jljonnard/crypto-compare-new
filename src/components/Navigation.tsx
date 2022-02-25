@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { BaseSyntheticEvent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import FavoriteList from "./FavoriteList.js";
+import FavoriteList from "./FavoriteList";
 
 import * as visibilityFilter from "../store/slices/visibilityFilter";
+import { RootState } from "../store/store";
 
 const menu = ["Accueil", "Versus", "DeFi"];
 
 const Navigation = () => {
     const dispatch = useDispatch();
-    const filter = useSelector((state) => state.visibilityFilter);
+    const filter = useSelector((state: RootState) => state.visibilityFilter);
 
     const [areSelected, setAreSelected] = useState([true, false, false]);
 
@@ -17,15 +18,17 @@ const Navigation = () => {
         if (filter === "DISPLAY_ONE_COIN") {
             setAreSelected([false, false, false]);
         }
-        const navigation = document.querySelector("nav");
-        if (filter === "NAVIGATION") {
-            navigation.style.display = "block";
-        } else if (window.innerWidth < 980) {
-            navigation.style.display = "none";
+        const navigation: HTMLElement | null = document.querySelector("nav");
+        if(navigation) {
+            if (filter === "NAVIGATION") {
+                navigation.style.display = "block";
+            } else if (window.innerWidth < 980) {
+                navigation.style.display = "none";
+            }
         }
     }, [filter]);
 
-    const handleClick = (event) => {
+    const handleClick = (event: BaseSyntheticEvent) => {
         switch (event.target.innerHTML) {
             case "Versus":
                 dispatch(visibilityFilter.set("DISPLAY_VERSUS"));

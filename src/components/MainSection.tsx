@@ -1,21 +1,22 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import TrendingList from "./TrendingList.js";
-import MarketCap from "./MarketCap.js";
-import SearchBar from "./SearchBar.js";
-import CoinInfos from "./CoinInfos.js";
-import Versus from "./Versus.js";
-import Navigation from "./Navigation.js";
-import VersusSmallScreen from "./VersusSmallScreen.js";
+import TrendingList from "./TrendingList";
+import MarketCap from "./MarketCap";
+import SearchBar from "./SearchBar";
+import CoinInfos from "./CoinInfos";
+import Versus from "./Versus";
+import Navigation from "./Navigation";
+import VersusSmallScreen from "./VersusSmallScreen";
 
 import * as coinDataActions from "../store/slices/coinData";
 import * as allCoinsList from "../store/slices/allCoinsList";
+import { RootState } from "../store/store";
 
 const MainSection = () => {
     const dispatch = useDispatch();
-    const coinData = useSelector((state) => state.coinData.left);
-    const filter = useSelector((state) => state.visibilityFilter);
+    const coinData = useSelector((state: RootState) => state.coinData.left);
+    const filter = useSelector((state: RootState) => state.visibilityFilter);
 
     useEffect(() => {
         dispatch(allCoinsList.get());
@@ -25,7 +26,7 @@ const MainSection = () => {
         <div className="page-wrap">
             {filter === "HOME" && (
                 <div>
-                    <SearchBar fetchSearch={coinDataActions.fetch} />
+                    <SearchBar />
                     <div className="main container">
                         <MarketCap />
                         <TrendingList />
@@ -34,7 +35,7 @@ const MainSection = () => {
             )}
             {filter === "DISPLAY_ONE_COIN" && coinData && (
                 <div>
-                    <SearchBar fetchSearch={coinDataActions.fetch} />
+                    <SearchBar />
                     <CoinInfos />
                 </div>
             )}

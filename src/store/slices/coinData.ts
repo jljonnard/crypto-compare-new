@@ -1,8 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { CoinData } from "../../models/CoinData";
+import { CoinDataResponse } from "../../models/CoinDataResponse";
+
+type CoinDataState = {
+    left: CoinData | null,
+    right: CoinData | null,
+};
+
+const INITIAL_STATE_COINDATA: CoinDataState = 
+    { left: null, right: null }
+;
 
 const { actions, reducer } = createSlice({
     name: "coinData",
-    initialState: { left: null, right: null },
+    initialState: INITIAL_STATE_COINDATA,
     reducers: {
         fetch: {
             prepare: (coin, right = false) => ({
@@ -17,7 +28,7 @@ const { actions, reducer } = createSlice({
             prepare: (response, right) => ({
                 payload: { right, data: response.data },
             }),
-            reducer: (state, action) => {
+            reducer: (state, action: PayloadAction<{right: boolean; data: CoinDataResponse}>) => {
                 if (action.payload.right) {
                     return {
                         ...state,

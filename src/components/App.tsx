@@ -1,8 +1,8 @@
 import React from "react";
 
-import MainSection from "./MainSection.js";
-import Navigation from "./Navigation.js";
-import Header from "./Header.js";
+import MainSection from "./MainSection";
+import Navigation from "./Navigation";
+import Header from "./Header";
 
 const App = () => {
     return (

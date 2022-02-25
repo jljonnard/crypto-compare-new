@@ -30,7 +30,7 @@ function* getVersusChart(action) {
             coin: action.payload.rightCoin,
             days: action.payload.days,
         });
-        yield put(versusChart.set(leftCoin, rightCoin, action.payload.days));
+        yield put(versusChart.set(leftCoin.data, rightCoin.data, action.payload.days));
     } catch (error) {
         yield console.log(error);
     }

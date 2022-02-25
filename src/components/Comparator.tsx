@@ -2,7 +2,14 @@ import React from "react";
 
 import "../css/Comparator.css";
 
-const Comparator = ({ leftData, rightData, title, add }) => {
+interface ComparatorProps {
+    leftData: number;
+    rightData: number;
+    title: string;
+    add: string;
+}
+
+const Comparator = ({ leftData, rightData, title, add }: ComparatorProps) => {
     return (
         <div className="comparator-wrap">
             <h6 className="comparator-title">{title}</h6>

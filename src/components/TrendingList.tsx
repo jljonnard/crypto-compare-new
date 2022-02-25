@@ -4,16 +4,18 @@ import { useDispatch, useSelector } from "react-redux";
 import * as visibilityFilter from "../store/slices/visibilityFilter";
 import * as trendingList from "../store/slices/trendingList"
 import * as coinData from "../store/slices/coinData";
+import { RootState } from "../store/store";
+import { TrendingListItem } from "../models/TrendingList";
 
 const TrendingList = () => {
-    const coinList = useSelector(state => state.trendingCoinList)
+    const coinList = useSelector((state: RootState) => state.trendingCoinList)
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(trendingList.get())
     }, [dispatch])
 
-    const handleClick = (coin) => {
+    const handleClick = (coin: string) => {
         dispatch(coinData.fetch(coin));
         dispatch(visibilityFilter.set("DISPLAY_ONE_COIN"));
     };
@@ -23,7 +25,7 @@ const TrendingList = () => {
             <h4>Tendances</h4>
             <table>
                 <tbody>
-                    {coinList.map((coin) => (
+                    {coinList.map((coin: TrendingListItem) => (
                         <tr
                             key={coin.id}
                             className="clickable"

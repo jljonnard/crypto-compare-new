@@ -3,12 +3,19 @@ import { Line } from "react-chartjs-2";
 import { useDispatch, useSelector } from "react-redux";
 
 import { buttons } from "../models/chartButtons";
+import { CoinData } from "../models/CoinData";
 
 import * as versusChart from "../store/slices/versusChart";
+import { RootState } from "../store/store";
 
-const VersusChart = ({ left, right }) => {
+interface VersusChartProps {
+    left: CoinData;
+    right: CoinData;
+}
+
+const VersusChart = ({ left, right }: VersusChartProps) => {
     const dispatch = useDispatch();
-    const coinChart = useSelector((state) => state.versusChart);
+    const coinChart = useSelector((state: RootState) => state.versusChart);
 
     const [buttonSelected, setButtonSelected] = useState(7);
 
@@ -57,7 +64,7 @@ const VersusChart = ({ left, right }) => {
                             },
                         ],
                     }}
-                    height="200px"
+                    height={200}
                     options={{
                         responsive: true,
                         maintainAspectRatio: false,

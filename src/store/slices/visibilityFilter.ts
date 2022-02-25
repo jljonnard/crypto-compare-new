@@ -1,10 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const { actions, reducer } = createSlice({
     name: "visibilityFilter",
     initialState: "HOME",
     reducers: {
-        set: (state, action) => action.payload,
+        set: (state, action: PayloadAction<string>) => action.payload,
     },
 });
 

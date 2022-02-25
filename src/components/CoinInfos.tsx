@@ -2,11 +2,13 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import Percentage from "./Percentage";
-import Chart from "./Chart.js";
-import Favorite from "./Favorite.js";
+import Chart from "./Chart";
+import Favorite from "./Favorite";
+import { RootState } from "../store/store";
 
 const CoinInfos = () => {
-    const coinData = useSelector((state) => state.coinData.left);
+    const coinData = useSelector((state: RootState) => state.coinData.left);
+
     return (
         <div className="main sub container">
             <div className="container">
@@ -20,7 +22,7 @@ const CoinInfos = () => {
                         {coinData.name} (
                         {coinData.symbol.toUpperCase()})
                     </h2>
-                    <Favorite coin={coinData} origin="info" />
+                    <Favorite coin={coinData} />
                 </div>
                 <h2>{coinData.price} €</h2>
             </div>

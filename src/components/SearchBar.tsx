@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { BaseSyntheticEvent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import * as visibilityFilter from "../store/slices/visibilityFilter";
+import * as coinDataActions from "../store/slices/coinData";
 
 import "../css/SearchBar.css";
+import { RootState } from "../store/store";
+
+type Result = { id: string; name: string }[];
 
 const SearchBar = ({
     id = "center",
-    fetchSearch,
     right = false,
     placeholder = "Rechercher une crypto",
 }) => {
     const dispatch = useDispatch();
-    const allCoinsList = useSelector((state) => state.allCoinsList);
+    const allCoinsList = useSelector((state: RootState) => state.allCoinsList);
 
-    const [results, setResults] = useState([]);
+    const [results, setResults] = useState<Result>([]);
     const [search, setSearch] = useState("");
     const [selectedResult, setSelectedResult] = useState(-1);
 
@@ -27,13 +30,15 @@ const SearchBar = ({
         };
     }, []);
 
-    const handleAllClicks = (event) => {
-        if (event.target.className !== "searchBar") {
-            reset();
+    const handleAllClicks = (event: any) => {
+        if (event) {
+            if (event.target.className !== "searchBar") {
+                reset();
+            }
         }
     };
 
-    const handleKeyboard = (event) => {
+    const handleKeyboard = (event: KeyboardEvent) => {
         if (event.key === "Tab") {
             reset();
         }
@@ -63,12 +68,16 @@ const SearchBar = ({
         }
     };
 
-    const resizeResults = (search) => {
+    const resizeResults = (search: string) => {
         //fonction qui permet de donner aux résultats la même largeur que le champ input
-        const wrapper = document.querySelector("#searchWrapper-" + id);
-        let resultsSpace = document.querySelector(".results." + id);
+        const wrapper: HTMLElement | null = document.querySelector(
+            "#searchWrapper-" + id
+        );
+        let resultsSpace: HTMLElement | null = document.querySelector(
+            ".results." + id
+        );
 
-        if (resultsSpace) {
+        if (wrapper && resultsSpace) {
             resultsSpace.style.width = wrapper.offsetWidth + "px";
             resultsSpace.style.top =
                 wrapper.offsetTop + wrapper.offsetHeight + "px";
@@ -82,9 +91,9 @@ const SearchBar = ({
         }
     };
 
-    const handleSearchUpdate = (event) => {
-        let searchResults = [];
-        let searchId = 0;
+    const handleSearchUpdate = (event: BaseSyntheticEvent) => {
+        let searchResults: Result = [];
+        let searchId: number = 0;
         resizeResults(event.target.value);
 
         if (event.target.value.length > 2) {
@@ -118,9 +127,9 @@ const SearchBar = ({
         setSelectedResult(-1);
     };
 
-    const handleClick = (coin) => {
+    const handleClick = (coin: string) => {
         reset();
-        dispatch(fetchSearch(coin, right));
+        dispatch(coinDataActions.fetch(coin, right));
         if (id === "center") {
             dispatch(visibilityFilter.set("DISPLAY_ONE_COIN"));
         }

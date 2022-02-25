@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { CoinData } from "../models/CoinData";
 
 import * as favoriteListActions from "../store/slices/favoriteList"
+import { RootState } from "../store/store";
 
-const Favorite = ({ coin }) => {
+interface FavoriteProps {
+    coin: CoinData
+}
+
+const Favorite = ({ coin }: FavoriteProps) => {
     const dispatch = useDispatch();
-    const favoriteList = useSelector((state) => state.favoriteList);
+    const favoriteList = useSelector((state: RootState) => state.favoriteList);
 
     const [isFavorite, setIsFavorite] = useState(false);
 
     useEffect(() => {
         let flag = false;
-        favoriteList.forEach((favoriteCoin) => {
+        favoriteList.forEach((favoriteCoin: CoinData) => {
             if (coin.id === favoriteCoin.id) {
                 flag = true;
             }

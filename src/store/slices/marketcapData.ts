@@ -1,11 +1,29 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+type MarketcapDataState = {
+    coins: string[];
+    percentages: number[];
+};
+
+type MarketcapDataResponse = {
+    data: {
+        data: {
+            market_cap_percentage: number;
+        };
+    };
+};
+
+const INITIAL_STATE_MARKETCAPDATA: MarketcapDataState = {
+    coins: [],
+    percentages: [],
+};
 
 const { actions, reducer } = createSlice({
     name: "marketCapData",
-    initialState: { coins: [], percentages: [] },
+    initialState: INITIAL_STATE_MARKETCAPDATA,
     reducers: {
         get: (state) => state,
-        set: (state, action) => {
+        set: (state, action: PayloadAction<MarketcapDataResponse>) => {
             return {
                 coins: Object.keys(
                     action.payload.data.data.market_cap_percentage

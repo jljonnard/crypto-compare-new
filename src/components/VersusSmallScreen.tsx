@@ -1,28 +1,28 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import SearchBar from "./SearchBar.js";
-import Comparator from "./Comparator.js";
-import VersusChart from "./VersusChart.js";
-import Favorite from "./Favorite.js";
+import SearchBar from "./SearchBar";
+import Comparator from "./Comparator";
+import VersusChart from "./VersusChart";
+import Favorite from "./Favorite";
 
 import * as coinDataActions from "../store/slices/coinData";
 import * as visibilityFilter from "../store/slices/visibilityFilter";
+import { RootState } from "../store/store";
 
-const Versus = () => {
+const VersusSmallScreen = () => {
     const dispatch = useDispatch();
-    const coinData = useSelector((state) => state.coinData);
+    const coinData = useSelector((state: RootState) => state.coinData);
 
-    const handleClick = (coin) => {
+    const handleClick = (coin: string) => {
         dispatch(visibilityFilter.set("DISPLAY_ONE_COIN"));
         dispatch(coinDataActions.fetch(coin));
     };
     return (
-        <div className="main sub container">
+        <div className="main sub container a">
             <div className="container">
-                <SearchBar fetchSearch={coinDataActions.fetch} id="left" />
+                <SearchBar id="left" />
                 <SearchBar
-                    fetchSearch={coinDataActions.fetch}
                     right={true}
                     id="right"
                     placeholder="La comparer à cette crypto"
@@ -43,16 +43,32 @@ const Versus = () => {
                             >
                                 {coinData.left.name}
                             </h2>
-                            <Favorite coin={coinData.left} origin="versus" />
+                            <Favorite coin={coinData.left} />
                         </div>
-                        <img
-                            className="only-on-big-screen"
-                            src={coinData.left.logo.large}
-                            alt={coinData.left.name}
-                        ></img>
                     </div>
+                    <h2>VS</h2>
                     {coinData.right && (
-                        <div>
+                        <div className="coin-wrap">
+                            <div className="wrapper title">
+                                <img
+                                    className="pic only-on-small-screen"
+                                    src={coinData.right.logo.small}
+                                    alt={coinData.right.name}
+                                ></img>
+                                <h2
+                                    className="clickable"
+                                    onClick={() =>
+                                        handleClick(coinData.right.id)
+                                    }
+                                >
+                                    {coinData.right.name}
+                                </h2>
+                                <Favorite coin={coinData.right} />
+                            </div>
+                        </div>
+                    )}
+                    {coinData.right && (
+                        <div className="comparators">
                             <Comparator
                                 title="MarketCap"
                                 leftData={coinData.left.marketcap}
@@ -97,34 +113,6 @@ const Versus = () => {
                             />
                         </div>
                     )}
-                    {coinData.right && (
-                        <div className="coin-wrap">
-                            <div className="wrapper title">
-                                <img
-                                    className="pic only-on-small-screen"
-                                    src={coinData.right.logo.small}
-                                    alt={coinData.right.name}
-                                ></img>
-                                <h2
-                                    className="clickable"
-                                    onClick={() =>
-                                        handleClick(coinData.right.id)
-                                    }
-                                >
-                                    {coinData.right.name}
-                                </h2>
-                                <Favorite
-                                    coin={coinData.right}
-                                    origin="versus"
-                                />
-                            </div>
-                            <img
-                                className="only-on-big-screen"
-                                src={coinData.right.logo.large}
-                                alt={coinData.right.name}
-                            ></img>
-                        </div>
-                    )}
                 </div>
             )}
             {coinData && coinData.right && (
@@ -134,4 +122,4 @@ const Versus = () => {
     );
 };
 
-export default Versus;
+export default VersusSmallScreen;

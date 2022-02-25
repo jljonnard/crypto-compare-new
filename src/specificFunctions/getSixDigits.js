@@ -1,7 +1,8 @@
 export const getSixDigitsOnly = (inputNumber) => {
     /* Les nombres décimaux n'étant gérés que sur 32 bits, 
-    on est obligé d'utiliser 2 tableaux comme ceci afin de limiter les impprécisions 
-    et de générer des décimales dans tous les sens */
+    on est obligé d'utiliser 2 tableaux comme ceci afin de limiter 
+    les imprécisions et de générer des décimales dans tous les sens */
+    
     let dividers = [
         1000000,
         100000,

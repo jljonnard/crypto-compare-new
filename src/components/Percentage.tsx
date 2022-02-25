@@ -1,6 +1,8 @@
 import React from "react";
 
-const Percentage = ({ variation }) => {
+interface PercentageProps {variation: number}
+
+const Percentage = ({ variation }: PercentageProps) => {
     return (
         <div
             className={`percentage ${variation < 0 ? "negative" : "positive"}`}

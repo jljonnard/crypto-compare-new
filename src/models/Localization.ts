@@ -1,0 +1,23 @@
+export type Localization = {
+    "en": string,
+    "de": string,
+    "es": string,
+    "fr": string,
+    "it": string,
+    "pl": string,
+    "ro": string,
+    "hu": string,
+    "nl": string,
+    "pt": string,
+    "sv": string,
+    "vi": string,
+    "tr": string,
+    "ru": string,
+    "ja": string,
+    "zh": string,
+    "zh-tw": string,
+    "ko": string,
+    "ar": string,
+    "th": string,
+    "id": string
+  }

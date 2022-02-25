@@ -5,10 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { buttons } from "../models/chartButtons";
 
 import * as coinChartActions from "../store/slices/coinChart";
+import { RootState } from "../store/store";
 
-const Chart = ({ id }) => {
+interface ChartProps {
+    id: string;
+}
+
+const Chart = ({ id }: ChartProps) => {
     const dispatch = useDispatch();
-    const coinChart = useSelector((state) => state.coinChart);
+    const coinChart = useSelector((state: RootState) => state.coinChart);
     const [buttonSelected, setButtonSelected] = useState(7);
 
     useEffect(() => {

@@ -2,12 +2,13 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import * as visibilityFilter from "../store/slices/visibilityFilter";
+import { RootState } from "../store/store";
 
 const Header = () => {
     const dispatch = useDispatch();
-    const filter = useSelector((state) => state.visibilityFilter);
+    const filter = useSelector((state: RootState) => state.visibilityFilter);
 
-    const handleClick = (newFilter) => {
+    const handleClick = (newFilter: string) => {
         dispatch(visibilityFilter.set(newFilter));
     };
 

@@ -5,12 +5,14 @@ import Percentage from "./Percentage";
 
 import * as visibilityFilter from "../store/slices/visibilityFilter";
 import * as coinData from "../store/slices/coinData";
+import { RootState } from "../store/store";
+import { CoinData } from "../models/CoinData";
 
 const FavoriteList = () => {
     const dispatch = useDispatch();
-    const favoriteList = useSelector((state) => state.favoriteList);
+    const favoriteList = useSelector((state: RootState) => state.favoriteList);
 
-    const handleClick = (coin) => {
+    const handleClick = (coin: string) => {
         dispatch(coinData.fetch(coin));
         dispatch(visibilityFilter.set("DISPLAY_ONE_COIN"));
     };
@@ -20,7 +22,7 @@ const FavoriteList = () => {
                 <h4>Favoris</h4>
                 <table>
                     <tbody>
-                        {favoriteList.map((coin) => (
+                        {favoriteList.map((coin: CoinData) => (
                             <tr
                                 key={coin.id}
                                 className="clickable"

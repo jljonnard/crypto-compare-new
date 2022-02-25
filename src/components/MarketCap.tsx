@@ -3,23 +3,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { Doughnut } from "react-chartjs-2";
 
 import * as marketCapData from "../store/slices/marketcapData";
+import { RootState } from "../store/store";
+import { AllCoinsListItem } from "../models/AllCoinsListResponse";
 
 const MarketCap = () => {
     const dispatch = useDispatch();
-    const allCoinsList = useSelector((state) => state.allCoinsList);
-    const marketcaps = useSelector((state) => state.marketcapData);
+    const allCoinsList = useSelector((state: RootState) => state.allCoinsList);
+    const marketcaps = useSelector((state: RootState) => state.marketcapData);
 
     useEffect(() => {
         dispatch(marketCapData.get());
     }, [dispatch]);
 
-    const getCoinBySymbol = (symbol) => {
-        const name = allCoinsList.find(coin => coin.symbol === symbol).name
+    const getCoinBySymbol = (symbol: string) => {
+        const name = allCoinsList.find(
+            (coin: AllCoinsListItem) => coin.symbol === symbol
+        ).name;
 
-        if(name !== -1) {
-            return name
+        if (name !== -1) {
+            return name;
         } else {
-            return "Chargement..."
+            return "Chargement...";
         }
     };
 
@@ -29,7 +33,7 @@ const MarketCap = () => {
             <Doughnut
                 data={{
                     labels: marketcaps.coins
-                        .map((coin) => {
+                        .map((coin: string) => {
                             return getCoinBySymbol(coin);
                         })
                         .concat(["Autres"]),
