@@ -9,6 +9,7 @@ import Favorite from "./Favorite";
 import * as coinDataActions from "../store/slices/coinData";
 import * as visibilityFilter from "../store/slices/visibilityFilter";
 import { getCoinData } from "../store/selectors/getCoinData";
+import { CoinData } from "../models/CoinData";
 
 const Versus = () => {
     const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const Versus = () => {
                             ></img>
                             <h2
                                 className="clickable"
-                                onClick={() => handleClick(coinData.left!.id)}
+                                onClick={() => handleClick((coinData.left as CoinData).id)}
                             >
                                 {coinData.left.name}
                             </h2>

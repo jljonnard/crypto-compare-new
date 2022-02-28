@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { buttons } from "../models/chartButtons";
 import { CoinData } from "../models/CoinData";
+import { getVersusChart } from "../store/selectors/getVersusChart";
 
 import * as versusChart from "../store/slices/versusChart";
-import { RootState } from "../store/store";
 
 interface VersusChartProps {
     left: CoinData;
@@ -15,7 +15,7 @@ interface VersusChartProps {
 
 const VersusChart = ({ left, right }: VersusChartProps) => {
     const dispatch = useDispatch();
-    const coinChart = useSelector((state: RootState) => state.versusChart);
+    const coinChart = useSelector(getVersusChart);
 
     const [buttonSelected, setButtonSelected] = useState(7);
 

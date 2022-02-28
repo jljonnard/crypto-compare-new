@@ -47,7 +47,7 @@ function* getVersusChart(
         );
         yield put(chartDays.set(action.payload.days))
         yield put(
-            versusChart.set(leftCoin.data, rightCoin.data, action.payload.days)
+            versusChart.set(leftCoin.data, rightCoin.data)
         );
     } catch (error) {
         yield console.log(error);
