@@ -1,14 +1,13 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { MarketcapDataResponse } from "../../models/MarketCapDataResponse";
+import { createSlice, PayloadAction, Selector } from "@reduxjs/toolkit";
+import { MarketCapDataResponse } from "../../models/MarketCapDataResponse";
+import { RootState } from "../store";
 
-type MarketcapDataState = {
-    coins: string[];
-    percentages: number[];
+type MarketCapDataState = {
+    btc: number;
 };
 
-const INITIAL_STATE_MARKETCAPDATA: MarketcapDataState = {
-    coins: [],
-    percentages: [],
+const INITIAL_STATE_MARKETCAPDATA: MarketCapDataState = {
+    btc: 100,
 };
 
 const { actions, reducer } = createSlice({
@@ -16,29 +15,15 @@ const { actions, reducer } = createSlice({
     initialState: INITIAL_STATE_MARKETCAPDATA,
     reducers: {
         get: (state) => state,
-        set: (state, action: PayloadAction<MarketcapDataResponse>) => {
-            return {
-                coins: Object.keys(
-                    action.payload.data.data.market_cap_percentage
-                ),
-                percentages: Object.values(
-                    action.payload.data.data.market_cap_percentage
-                )
-                    .map((percentage) => Math.round(percentage * 100) / 100)
-                    .concat([
-                        Math.round(
-                            (100 -
-                                Object.values(
-                                    action.payload.data.data
-                                        .market_cap_percentage
-                                ).reduce((x, y) => x + y)) *
-                                100
-                        ) / 100,
-                    ]),
-            };
+        set: (state, action: PayloadAction<MarketCapDataResponse>) => {
+            return action.payload.data.data.market_cap_percentage;
         },
     },
 });
+
+export const getRawMarketCapData: Selector<RootState, MarketCapDataState> = (
+    state: RootState
+) => state.marketCapData;
 
 export const { get, set } = actions;
 

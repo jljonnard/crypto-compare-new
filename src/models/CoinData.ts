@@ -9,11 +9,11 @@ export type CoinData = {
     };
     price: number;
     description: string;
-    marketcapRank: number;
+    marketCapRank: number;
     categories: (string | null)[];
     communityScore: number;
     sentimentUp: number;
-    marketcap: number;
+    marketCap: number;
     priceChange24h: number;
     priceChange7d: number;
     priceChange30d: number;

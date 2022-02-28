@@ -2,20 +2,22 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Doughnut } from "react-chartjs-2";
 
-import * as marketCapData from "../store/slices/marketcapData";
+import * as marketCapData from "../store/slices/marketCapData";
 import { RootState } from "../store/store";
 import { AllCoinsListItem } from "../models/AllCoinsListResponse";
+import { getMarketCapData } from "../store/selectors/getMarketCapData";
 
 const MarketCap = () => {
     const dispatch = useDispatch();
     const allCoinsList = useSelector((state: RootState) => state.allCoinsList);
-    const marketcaps = useSelector((state: RootState) => state.marketcapData);
+    const marketCaps = useSelector(getMarketCapData);
 
     useEffect(() => {
         dispatch(marketCapData.get());
     }, [dispatch]);
 
     const getCoinBySymbol = (symbol: string) => {
+        console.log(allCoinsList)
         const name = allCoinsList.find(
             (coin: AllCoinsListItem) => coin.symbol === symbol
         ).name;
@@ -32,14 +34,14 @@ const MarketCap = () => {
             <h4>MarketCap</h4>
             <Doughnut
                 data={{
-                    labels: marketcaps.coins
+                    labels: marketCaps.coins
                         .map((coin: string) => {
                             return getCoinBySymbol(coin);
                         })
                         .concat(["Autres"]),
                     datasets: [
                         {
-                            data: marketcaps.percentages.slice(),
+                            data: marketCaps.percentages.slice(),
                             backgroundColor: [
                                 "rgba(240,130,20,0.4)",
                                 "rgba(70,25,70,0.4)",

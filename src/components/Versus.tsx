@@ -55,8 +55,8 @@ const Versus = () => {
                         <div>
                             <Comparator
                                 title="MarketCap"
-                                leftData={coinData.left.marketcap}
-                                rightData={coinData.right.marketcap}
+                                leftData={coinData.left.marketCap}
+                                rightData={coinData.right.marketCap}
                                 add="M$"
                             />
                             <Comparator

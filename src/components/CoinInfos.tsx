@@ -33,7 +33,7 @@ const CoinInfos = () => {
                         <tbody>
                             <tr>
                                 <td>Classement : </td>
-                                <td>{coinData.marketcapRank}</td>
+                                <td>{coinData.marketCapRank}</td>
                             </tr>
                             <tr>
                                 <td>Score de la communauté : </td>

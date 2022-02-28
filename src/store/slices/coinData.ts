@@ -40,7 +40,7 @@ const { actions, reducer } = createSlice({
                             price: action.payload.data.market_data.current_price
                                 .eur,
                             description: action.payload.data.description.fr,
-                            marketcapRank: action.payload.data.market_cap_rank,
+                            marketCapRank: action.payload.data.market_cap_rank,
                             categories: action.payload.data.categories,
                             communityScore:
                                 Math.round(
@@ -49,7 +49,7 @@ const { actions, reducer } = createSlice({
                             sentimentUp:
                                 action.payload.data
                                     .sentiment_votes_up_percentage,
-                            marketcap: Math.round(
+                            marketCap: Math.round(
                                 action.payload.data.market_data.market_cap.eur /
                                     1000000
                             ),
@@ -86,7 +86,7 @@ const { actions, reducer } = createSlice({
                             price: action.payload.data.market_data.current_price
                                 .eur,
                             description: action.payload.data.description.fr,
-                            marketcapRank: action.payload.data.market_cap_rank,
+                            marketCapRank: action.payload.data.market_cap_rank,
                             categories: action.payload.data.categories,
                             communityScore:
                                 Math.round(
@@ -95,7 +95,7 @@ const { actions, reducer } = createSlice({
                             sentimentUp:
                                 action.payload.data
                                     .sentiment_votes_up_percentage,
-                            marketcap: Math.round(
+                            marketCap: Math.round(
                                 action.payload.data.market_data.market_cap.eur /
                                     1000000
                             ),

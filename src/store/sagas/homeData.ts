@@ -1,11 +1,12 @@
 import { takeLatest, call, put, fork } from "redux-saga/effects";
 import * as api from "../apis";
 
-import * as marketCapData from "../slices/marketcapData";
+import * as marketCapData from "../slices/marketCapData";
 import * as trendingList from "../slices/trendingList";
 import * as allCoinsList from "../slices/allCoinsList";
+
 import { AllCoinsListResponse } from "../../models/AllCoinsListResponse";
-import { MarketcapDataResponse } from "../../models/MarketCapDataResponse";
+import { MarketCapDataResponse } from "../../models/MarketCapDataResponse";
 import { TrendingListResponse } from "../../models/TrendingList";
 
 function* getAllCoinsList() {
@@ -23,7 +24,7 @@ function* watchAllCoinsList() {
 
 function* getMarketCapData() {
     try {
-        const response: MarketcapDataResponse = yield call(api.getMarketCap);
+        const response: MarketCapDataResponse = yield call(api.getMarketCap);
         yield put(marketCapData.set(response));
     } catch (error) {
         yield console.log(error);

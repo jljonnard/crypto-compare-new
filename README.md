@@ -8,7 +8,7 @@ Il y a pour le moment 4 grandes fonctionnalités sur le site :
 
 `Rechercher`: permettant d'avoir plusieurs informations sur une crypto-monnaie, avec un graphique de prix dont on peut changer l'échelle<br />
 `Versus`: proposant de comparer 2 crypto-monnaies sur leurs stats et sur un graphique commun en %<br />
-`Accueil`: où l'on peut retrouver la répartition du marketcap du top 10, ainsi que les tendances<br />
+`Accueil`: où l'on peut retrouver la répartition du marketCap du top 10, ainsi que les tendances<br />
 `Favoris` : permettant de retrouver toutes les infos des crypto-monnaies préférées de l'utilisateur en 1 clic
 
 Une page `DeFi` est aussi en cours de création et pourrait arriver bientôt.
@@ -42,7 +42,7 @@ L'API est utilisée pour obtenir :
 <li><strong>Diverses informations sur une crypto-monnaie</strong> : utile pour la section Rechercher et Versus</li>
 <li><strong>Les évolutions de prix sur une crypto-monnaie</strong> : utile pour réaliser tous les graphiques</li>
 <li><strong>Les crypto-monnaies en tendances</strong> : utile pour les afficher en page d'accueil</li>
-<li><strong>La répartion du marketcap dans le top 10</strong> : utile pour le mettre sous forme de diagramme circulaire en page d'accueil</li>
+<li><strong>La répartion du marketCap dans le top 10</strong> : utile pour le mettre sous forme de diagramme circulaire en page d'accueil</li>
 </ul>
 
 ## Chart.js

@@ -7,7 +7,9 @@ type AllCoinsListState = {
     name: string;
 }[];
 
-const INITIAL_STATE_ALLCOINSLIST: AllCoinsListState = []
+const INITIAL_STATE_ALLCOINSLIST: AllCoinsListState = [
+    { id: "bitcoin", symbol: "btc", name: "Bitcoin" },
+];
 
 const { actions, reducer } = createSlice({
     name: "allCoinsList",

@@ -1,7 +1,9 @@
-export type MarketcapDataResponse = {
+export type MarketCapDataResponse = {
     data: {
         data: {
-            market_cap_percentage: number;
+            market_cap_percentage: {
+                btc: number;
+            };
         };
     };
 };
