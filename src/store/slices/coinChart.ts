@@ -1,11 +1,14 @@
 import { getSixDigitsOnly } from "../../specificFunctions/getSixDigits";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CoinChartResponse } from "../../models/CoinChartResponse";
-import { RootState } from "../store";
+
+type CoinChartState = (string | number)[][];
+
+const INITIAL_STATE_COINCHART: CoinChartState = [[], []];
 
 const { actions, reducer } = createSlice({
     name: "coinChart",
-    initialState: [[], []],
+    initialState: INITIAL_STATE_COINCHART,
     reducers: {
         get: {
             prepare: (coin: string, days: number) => ({
@@ -21,7 +24,7 @@ const { actions, reducer } = createSlice({
                 payload: { days, data: response.data },
             }),
             reducer: (
-                state: RootState,
+                state,
                 action: PayloadAction<{ days: number; data: CoinChartResponse }>
             ) => {
                 switch (action.payload.days) {

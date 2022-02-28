@@ -2,7 +2,7 @@ import { configureStore, EnhancedStore } from "@reduxjs/toolkit";
 import rootSaga from "./sagas";
 import createSagaMiddleware from "@redux-saga/core";
 
-import trendingCoinList from "./slices/trendingList";
+import trendingList from "./slices/trendingList";
 import allCoinsList from "./slices/allCoinsList";
 import marketcapData from "./slices/marketcapData";
 import coinData from "./slices/coinData";
@@ -14,7 +14,7 @@ import visibilityFilter from "./slices/visibilityFilter";
 const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = {
-        trendingCoinList: trendingCoinList,
+        trendingList: trendingList,
         allCoinsList: allCoinsList,
         marketcapData: marketcapData,
         coinData: coinData,

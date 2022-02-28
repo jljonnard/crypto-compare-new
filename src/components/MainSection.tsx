@@ -9,7 +9,6 @@ import Versus from "./Versus";
 import Navigation from "./Navigation";
 import VersusSmallScreen from "./VersusSmallScreen";
 
-import * as coinDataActions from "../store/slices/coinData";
 import * as allCoinsList from "../store/slices/allCoinsList";
 import { RootState } from "../store/store";
 

@@ -2,18 +2,18 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import * as visibilityFilter from "../store/slices/visibilityFilter";
-import * as trendingList from "../store/slices/trendingList"
+import * as trendingList from "../store/slices/trendingList";
 import * as coinData from "../store/slices/coinData";
-import { RootState } from "../store/store";
 import { TrendingListItem } from "../models/TrendingList";
+import { getTrendingList } from "../store/selectors/getTrendingList";
 
 const TrendingList = () => {
-    const coinList = useSelector((state: RootState) => state.trendingCoinList)
-    const dispatch = useDispatch()
+    const coinList = useSelector(getTrendingList);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(trendingList.get())
-    }, [dispatch])
+        dispatch(trendingList.get());
+    }, [dispatch]);
 
     const handleClick = (coin: string) => {
         dispatch(coinData.fetch(coin));
@@ -49,5 +49,4 @@ const TrendingList = () => {
     );
 };
 
-export default TrendingList
-
+export default TrendingList;

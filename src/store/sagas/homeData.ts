@@ -39,7 +39,7 @@ function* getTrendingList() {
         const response: { data: TrendingListResponse } = yield call(
             api.getTrendingList
         );
-        yield put(trendingList.set(response));
+        yield put(trendingList.set(response.data));
     } catch (error) {
         yield console.log(error);
     }
