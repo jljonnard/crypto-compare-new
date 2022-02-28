@@ -16,7 +16,7 @@ const VersusSmallScreen = () => {
 
     const handleClick = (coin: string) => {
         dispatch(visibilityFilter.set("DISPLAY_ONE_COIN"));
-        dispatch(coinDataActions.fetch(coin));
+        dispatch(coinDataActions.get(coin));
     };
     return (
         <div className="main sub container a">

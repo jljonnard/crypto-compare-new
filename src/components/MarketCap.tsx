@@ -17,7 +17,6 @@ const MarketCap = () => {
     }, [dispatch]);
 
     const getCoinBySymbol = (symbol: string) => {
-        console.log(allCoinsList)
         const name = allCoinsList.find(
             (coin: AllCoinsListItem) => coin.symbol === symbol
         ).name;

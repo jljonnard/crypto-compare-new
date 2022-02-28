@@ -16,7 +16,7 @@ const TrendingList = () => {
     }, [dispatch]);
 
     const handleClick = (coin: string) => {
-        dispatch(coinData.fetch(coin));
+        dispatch(coinData.get(coin));
         dispatch(visibilityFilter.set("DISPLAY_ONE_COIN"));
     };
 

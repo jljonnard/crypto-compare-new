@@ -6,18 +6,22 @@ import { PayloadAction } from "@reduxjs/toolkit";
 
 function* getCoinData(action: PayloadAction<{ coin: string; right: boolean }>) {
     try {
-        const response: CoinDataResponse = yield call(
+        const response: { data: CoinDataResponse } = yield call(
             api.getCoinData,
             action.payload.coin
         );
-        yield put(actions.get(response, action.payload.right));
+        if (action.payload.right) {
+            yield put(actions.setRight(response.data));
+        } else {
+            yield put(actions.setLeft(response.data));
+        }
     } catch (error) {
         yield console.log(error);
     }
 }
 
 function* watchCoinData() {
-    yield takeLatest(actions.fetch.type, getCoinData);
+    yield takeLatest(actions.get.type, getCoinData);
 }
 
 const coinSagas = [fork(watchCoinData)];

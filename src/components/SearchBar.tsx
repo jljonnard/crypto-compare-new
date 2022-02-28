@@ -129,7 +129,7 @@ const SearchBar = ({
 
     const handleClick = (coin: string) => {
         reset();
-        dispatch(coinDataActions.fetch(coin, right));
+        dispatch(coinDataActions.get(coin, right));
         if (id === "center") {
             dispatch(visibilityFilter.set("DISPLAY_ONE_COIN"));
         }

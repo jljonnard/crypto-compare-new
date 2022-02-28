@@ -8,15 +8,15 @@ import Favorite from "./Favorite";
 
 import * as coinDataActions from "../store/slices/coinData";
 import * as visibilityFilter from "../store/slices/visibilityFilter";
-import { RootState } from "../store/store";
+import { getCoinData } from "../store/selectors/getCoinData";
 
 const Versus = () => {
     const dispatch = useDispatch();
-    const coinData = useSelector((state: RootState) => state.coinData);
+    const coinData = useSelector(getCoinData);
 
     const handleClick = (coin: string) => {
         dispatch(visibilityFilter.set("DISPLAY_ONE_COIN"));
-        dispatch(coinDataActions.fetch(coin));
+        dispatch(coinDataActions.get(coin));
     };
     return (
         <div className="main sub container">
@@ -39,7 +39,7 @@ const Versus = () => {
                             ></img>
                             <h2
                                 className="clickable"
-                                onClick={() => handleClick(coinData.left.id)}
+                                onClick={() => handleClick(coinData.left!.id)}
                             >
                                 {coinData.left.name}
                             </h2>
@@ -108,7 +108,7 @@ const Versus = () => {
                                 <h2
                                     className="clickable"
                                     onClick={() =>
-                                        handleClick(coinData.right.id)
+                                        handleClick(coinData.right!.id)
                                     }
                                 >
                                     {coinData.right.name}
@@ -126,7 +126,7 @@ const Versus = () => {
                     )}
                 </div>
             )}
-            {coinData && coinData.right && (
+            {coinData.left && coinData.right && (
                 <VersusChart left={coinData.left} right={coinData.right} />
             )}
         </div>
