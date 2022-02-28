@@ -1,10 +1,10 @@
-import { getSixDigitsOnly } from "../../specificFunctions/getSixDigits";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, Selector } from "@reduxjs/toolkit";
 import { CoinChartResponse } from "../../models/CoinChartResponse";
+import { RootState } from "../store";
 
-type CoinChartState = (string | number)[][];
+type CoinChartState = CoinChartResponse;
 
-const INITIAL_STATE_COINCHART: CoinChartState = [[], []];
+const INITIAL_STATE_COINCHART: CoinChartState = { prices: [[]] };
 
 const { actions, reducer } = createSlice({
     name: "coinChart",
@@ -19,99 +19,14 @@ const { actions, reducer } = createSlice({
             }),
             reducer: (state) => state,
         },
-        set: {
-            prepare: (response: { data: CoinChartResponse }, days: number) => ({
-                payload: { days, data: response.data },
-            }),
-            reducer: (
-                state,
-                action: PayloadAction<{ days: number; data: CoinChartResponse }>
-            ) => {
-                switch (action.payload.days) {
-                    case 1:
-                        return [
-                            action.payload.data.prices.map((time) => {
-                                const tempDate = new Date(time[0]);
-                                return tempDate.getHours().toString() + ":00";
-                            }),
-                            action.payload.data.prices.map((price) =>
-                                getSixDigitsOnly(price[1])
-                            ),
-                        ];
-                    case 7:
-                        return [
-                            action.payload.data.prices.map((time) => {
-                                const tempDate = new Date(time[0]);
-                                return (
-                                    tempDate.getDate().toString() +
-                                    " " +
-                                    tempDate.getHours().toString() +
-                                    ":00"
-                                );
-                            }),
-                            action.payload.data.prices.map((price) =>
-                                getSixDigitsOnly(price[1])
-                            ),
-                        ];
-                    case 30:
-                        return [
-                            action.payload.data.prices.map((time) => {
-                                const tempDate = new Date(time[0]);
-                                return tempDate.getDate().toString();
-                            }),
-                            action.payload.data.prices.map((price) =>
-                                getSixDigitsOnly(price[1])
-                            ),
-                        ];
-                    case 90:
-                        return [
-                            action.payload.data.prices.map((time) => {
-                                const tempDate = new Date(time[0]);
-                                return (
-                                    tempDate.getDate().toString() +
-                                    "/" +
-                                    (tempDate.getMonth() + 1).toString()
-                                );
-                            }),
-                            action.payload.data.prices.map((price) =>
-                                getSixDigitsOnly(price[1])
-                            ),
-                        ];
-                    case 180:
-                        return [
-                            action.payload.data.prices.map((time) => {
-                                const tempDate = new Date(time[0]);
-                                return (
-                                    tempDate.getDate().toString() +
-                                    "/" +
-                                    (tempDate.getMonth() + 1).toString()
-                                );
-                            }),
-                            action.payload.data.prices.map((price) =>
-                                getSixDigitsOnly(price[1])
-                            ),
-                        ];
-                    case 365:
-                        return [
-                            action.payload.data.prices.map((time) => {
-                                const tempDate = new Date(time[0]);
-                                return (
-                                    tempDate.getDate().toString() +
-                                    "/" +
-                                    (tempDate.getMonth() + 1).toString()
-                                );
-                            }),
-                            action.payload.data.prices.map((price) =>
-                                getSixDigitsOnly(price[1])
-                            ),
-                        ];
-                    default:
-                        return state;
-                }
-            },
-        },
+        set: (state, action: PayloadAction<CoinChartResponse>) =>
+            action.payload,
     },
 });
+
+export const getRawCoinChart: Selector<RootState, CoinChartState> = (
+    state: RootState
+) => state.coinChart;
 
 export const { set, get } = actions;
 

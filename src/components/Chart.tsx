@@ -3,6 +3,7 @@ import { Line } from "react-chartjs-2";
 import { useDispatch, useSelector } from "react-redux";
 
 import { buttons } from "../models/chartButtons";
+import { getCoinChart } from "../store/selectors/getCoinChart";
 
 import * as coinChartActions from "../store/slices/coinChart";
 import { RootState } from "../store/store";
@@ -13,8 +14,9 @@ interface ChartProps {
 
 const Chart = ({ id }: ChartProps) => {
     const dispatch = useDispatch();
-    const coinChart = useSelector((state: RootState) => state.coinChart);
-    const [buttonSelected, setButtonSelected] = useState(7);
+    const coinChart = useSelector(getCoinChart);
+    const days = useSelector((state: RootState) => state.chartDays)
+    const [buttonSelected, setButtonSelected] = useState(days);
 
     useEffect(() => {
         dispatch(coinChartActions.get(id, buttonSelected));
@@ -38,10 +40,10 @@ const Chart = ({ id }: ChartProps) => {
             {coinChart && (
                 <Line
                     data={{
-                        labels: coinChart.slice()[0].slice(),
+                        labels: coinChart[0],
                         datasets: [
                             {
-                                data: coinChart.slice()[1].slice(),
+                                data: coinChart[1],
                                 backgroundColor: "rgba(159,107,192,0.25)",
                                 borderColor: "rgba(159,107,192,0.6)",
                                 hoverBackgroundColor: "rgba(159,107,192,1)",

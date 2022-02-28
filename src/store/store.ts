@@ -7,6 +7,7 @@ import allCoinsList from "./slices/allCoinsList";
 import marketCapData from "./slices/marketCapData";
 import coinData from "./slices/coinData";
 import coinChart from "./slices/coinChart";
+import chartDays from "./slices/chartDays"
 import versusChart from "./slices/versusChart";
 import favoriteList from "./slices/favoriteList";
 import visibilityFilter from "./slices/visibilityFilter";
@@ -19,6 +20,7 @@ const rootReducer = {
         marketCapData: marketCapData,
         coinData: coinData,
         coinChart: coinChart,
+        chartDays: chartDays,
         versusChart: versusChart,
         favoriteList: favoriteList,
         visibilityFilter: visibilityFilter,

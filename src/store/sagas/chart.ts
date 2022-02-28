@@ -3,6 +3,7 @@ import { takeLatest, call, put, fork } from "redux-saga/effects";
 import { CoinChartResponse } from "../../models/CoinChartResponse";
 import * as api from "../apis";
 
+import * as chartDays from "../slices/chartDays";
 import * as coinChart from "../slices/coinChart";
 import * as versusChart from "../slices/versusChart";
 
@@ -15,7 +16,8 @@ function* getCoinChart(action: PayloadAction<{ coin: string; days: number }>) {
                 days: action.payload.days,
             }
         );
-        yield put(coinChart.set(response, action.payload.days));
+        yield put(chartDays.set(action.payload.days))
+        yield put(coinChart.set(response.data));
     } catch (error) {
         yield console.log(error);
     }
@@ -43,6 +45,7 @@ function* getVersusChart(
                 days: action.payload.days,
             }
         );
+        yield put(chartDays.set(action.payload.days))
         yield put(
             versusChart.set(leftCoin.data, rightCoin.data, action.payload.days)
         );
