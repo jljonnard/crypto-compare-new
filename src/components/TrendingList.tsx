@@ -25,10 +25,11 @@ const TrendingList = () => {
             <h4>Tendances</h4>
             <table>
                 <tbody>
-                    {coinList.map((coin: TrendingListItem) => (
+                    {coinList.map((coin: TrendingListItem, id: number) => (
                         <tr
                             key={coin.id}
                             className="clickable"
+                            id={"trendingCoin-" + id.toString()}
                             onClick={() => handleClick(coin.id)}
                         >
                             <td>

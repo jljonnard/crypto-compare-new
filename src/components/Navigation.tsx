@@ -45,9 +45,9 @@ const Navigation = () => {
     };
 
     return (
-        <nav className="only-on-big-screen">
+        <nav id="navbar" className="only-on-big-screen">
             <header className="nav-header">
-                <div className="clickable inner" onClick={handleClick}>
+                <div className="clickable inner" id="nav-header" onClick={handleClick}>
                     <h1>Crypto Compare</h1>
                 </div>
             </header>

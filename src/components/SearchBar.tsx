@@ -159,6 +159,7 @@ const SearchBar = ({
                             selectedResult === resultId && "selected"
                         }`}
                         key={result.id + id}
+                        id={"searchResult-" + resultId}
                         onClick={() => handleClick(result.id)}
                     >
                         {result.name}

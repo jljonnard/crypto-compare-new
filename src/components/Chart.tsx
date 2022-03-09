@@ -15,7 +15,7 @@ interface ChartProps {
 const Chart = ({ id }: ChartProps) => {
     const dispatch = useDispatch();
     const coinChart = useSelector(getCoinChart);
-    const days = useSelector((state: RootState) => state.chartDays)
+    const days = useSelector((state: RootState) => state.chartDays);
     const [buttonSelected, setButtonSelected] = useState(days);
 
     useEffect(() => {
@@ -28,6 +28,7 @@ const Chart = ({ id }: ChartProps) => {
                 {buttons.map((button) => (
                     <div
                         key={button.days}
+                        id={"button-" + button.legend}
                         className={`small button ${
                             button.days === buttonSelected && "selected"
                         }`}
